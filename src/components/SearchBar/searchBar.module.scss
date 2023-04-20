@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__company {
+font-weight: 700;
+font-size: 24px;
+line-height: 100%;
+color: #222222;
+}
+
+.header__leftSide {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 16px;
+}
+
+.header__rightSide {
+  display: flex;
+  flex-wrap: nowrap;
+  column-gap: 16px;
+}
+
+.header__button {
+padding: 8px 16px;
+width: auto;
+border: none;
+cursor: pointer;
+height: 40px;
+background: #F0F1F2;
+border-radius: 8px;
+font-weight: 700;
+font-size: 16px;
+line-height: 20px;
+color: #222222;
+}
+
+.header__button_active {
+background: #E9F9E4;
+color: #52BC20;
+padding: 8px 16px;
+width: auto;
+border: none;
+cursor: pointer;
+height: 40px;
+border-radius: 8px;
+font-weight: 700;
+font-size: 16px;
+line-height: 20px;
+}
