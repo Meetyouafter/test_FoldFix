@@ -30,6 +30,7 @@ const SearchBar = () => {
       <div className={styles.header__rightSide}>
         <input
           type="search"
+          className={styles.header__search}
           placeholder="Search collections, NTFs"
         />
         <button type="button" className={styles.header__button}>

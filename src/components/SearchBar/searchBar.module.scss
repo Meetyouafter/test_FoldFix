@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 80px;
+  padding: 20px 24px 32px 24px;
 }
 
 .header__company {
@@ -14,6 +16,7 @@ color: #222222;
 .header__leftSide {
   display: flex;
   flex-wrap: nowrap;
+  align-items: center;
   column-gap: 16px;
 }
 
@@ -49,4 +52,15 @@ border-radius: 8px;
 font-weight: 700;
 font-size: 16px;
 line-height: 20px;
+}
+
+input[type="search"] {
+  background: url(../../assets/images/search.svg) no-repeat left center;
+  background-position-x: 8px;
+padding: 8px 8px 8px 38px;
+gap: 8px;
+width: 304px;
+height: 40px;
+border: 1.5px solid rgba(0, 0, 0, 0.1);
+border-radius: 10px;
 }
