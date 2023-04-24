@@ -21,8 +21,6 @@
 
 .buttons__container_mobile {
   display: none;
-  display: flex;
-  column-gap: 16px;
 }
 
 .header__leftSide {
@@ -36,6 +34,7 @@
 .header__rightSide {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: flex-end;
   column-gap: 16px;
   width: 50%;
 }
