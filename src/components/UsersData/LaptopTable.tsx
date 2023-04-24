@@ -2,44 +2,36 @@ import React, { useEffect, useState, FC } from 'react';
 import axios from 'axios';
 import tableSortImg from '../../assets/images/tableSort.svg';
 import styles from './userData.module.scss';
+import { User } from '../../store/dataSlice/collectionSlice';
+import {
+  INTEREST, NOW_PRICE, SALES, VOL,
+} from '../../mock/mockCollection';
 
-type User = {
-  id: number,
+type UpdatedCollection = {
+  id: string,
   avatar: string,
   name: string,
   floor_price: number,
-  now_price: number,
+  now_price: string,
   vol: string,
   sales: string,
   interest: string,
 }
 
-export type UsersProps = {
-  users: User[];
+export interface UsersProps {
+  collection: UpdatedCollection[];
 }
 
-const LaptopTable: FC<UsersProps> = ({ users }) => {
-  const [userDataForTable, setUserDataForTable] = useState(users);
+const LaptopTable: FC<UsersProps> = ({ collection }) => {
+  const [collectionForTable, setCollectionForTable] = useState(collection);
   const [sortOrder, setSortOrder] = useState<{ [key: string]: 'asc' | 'desc' }>({});
-
-  useEffect(() => {
-    const updatedUserData = users.map((data) => ({
-      id: data.id,
-      avatar: data.avatar,
-      name: data.name,
-      floor_price: data.floor_price,
-      now_price: data.now_price,
-      vol: data.vol,
-      sales: data.sales,
-      interest: data.interest,
-    }));
-    setUserDataForTable(updatedUserData);
-  }, [users]);
+  console.log(collection)
+  console.log({collectionForTable})
 
   const getFloorPrice = (price: number): number => Math.floor(price);
 
-  const handleSortClick = (key: keyof User) => {
-    setUserDataForTable((prevUserData) => {
+  const handleSortClick = (key: keyof UpdatedCollection) => {
+    setCollectionForTable((prevUserData) => {
       const sortedData = [...prevUserData].sort((a, b) => {
         if (sortOrder[key] === 'asc') {
           return a[key] < b[key] ? 1 : -1;
@@ -53,15 +45,6 @@ const LaptopTable: FC<UsersProps> = ({ users }) => {
       return sortedData;
     });
   };
-
-  useEffect(() => {
-    axios.get('https://robox-test.herokuapp.com/api/collection', {
-      headers: {
-        apikey: 'test123',
-      },
-    })
-      .then((response) => console.log(response.data));
-  }, []);
 
   return (
     <table className={`${styles.table} ${styles.laptop_screen}`}>
@@ -93,7 +76,7 @@ const LaptopTable: FC<UsersProps> = ({ users }) => {
         </tr>
       </thead>
       <tbody>
-        {userDataForTable.map((user) => (
+        {collectionForTable.map((user) => (
           <tr key={user.id}>
             <td className={`${styles.table__column_name} ${styles.width__25}`}>
               <img src={user.avatar} alt="avatar" className={styles.table__avatar} />
