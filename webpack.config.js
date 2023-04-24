@@ -15,7 +15,16 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    port: 3000,
+    port: 8000,
+    hot: true,
+    open: true,
+    proxy: {
+      '/api': {
+        target: 'https://robox-test.herokuapp.com',
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   },
   module: {
     rules: [

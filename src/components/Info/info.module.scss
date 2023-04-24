@@ -15,6 +15,7 @@
   line-height: 48px;
   letter-spacing: -0.05em;
   color: #151515;
+  text-align: center;
 
   span {
     color: #4bab29;
@@ -42,6 +43,7 @@
   height: 128px;
   border-radius: 20px;
   background: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 .info__box__title {
@@ -56,4 +58,29 @@
   font-size: 13px;
   line-height: 18px;
   color: #8a8a8e;
+}
+
+.info__mobileLogo {
+  display: none;
+}
+
+@media screen and (max-width: 390px) {
+  .info {
+    padding: 24px 24px 0 24px;
+    height: 184px;
+    row-gap: 14px;
+  }
+
+  .info__title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .info__mobileLogo {
+    display: block;
+  }
+
+  .info__body {
+    display: none;
+  }
 }

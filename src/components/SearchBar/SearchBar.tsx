@@ -22,10 +22,12 @@ const SearchBar = () => {
       <div className={styles.header__leftSide}>
         <img src={logoImg} alt="FoldFix" />
         <p className={styles.header__company}>Robox.Fi</p>
-        <button type="button" onClick={() => toggleActiveButton(1)} className={getButtonClassName(1)}>Trade</button>
-        <button type="button" onClick={() => toggleActiveButton(2)} className={getButtonClassName(2)}>Lend</button>
-        <button type="button" onClick={() => toggleActiveButton(3)} className={getButtonClassName(3)}>LeaderBoards</button>
-        <button type="button" onClick={() => toggleActiveButton(4)} className={getButtonClassName(4)}>About</button>
+        <div className={styles.buttons__container_laptop}>
+          <button type="button" onClick={() => toggleActiveButton(1)} className={getButtonClassName(1)}>Trade</button>
+          <button type="button" onClick={() => toggleActiveButton(2)} className={getButtonClassName(2)}>Lend</button>
+          <button type="button" onClick={() => toggleActiveButton(3)} className={getButtonClassName(3)}>LeaderBoards</button>
+          <button type="button" onClick={() => toggleActiveButton(4)} className={getButtonClassName(4)}>About</button>
+        </div>
       </div>
       <div className={styles.header__rightSide}>
         <input
@@ -36,7 +38,13 @@ const SearchBar = () => {
         <button type="button" className={styles.header__button}>
           <img src={moonImg} alt="Change theme" />
         </button>
-        <button className={styles.header__button} type="button">Connect Wallet</button>
+        <button className={`${styles.header__button} ${styles.header__button_wallet}`} type="button">Connect Wallet</button>
+      </div>
+      <div className={styles.buttons__container_mobile}>
+        <button type="button" onClick={() => toggleActiveButton(1)} className={getButtonClassName(1)}>Trade</button>
+        <button type="button" onClick={() => toggleActiveButton(2)} className={getButtonClassName(2)}>Lend</button>
+        <button type="button" onClick={() => toggleActiveButton(3)} className={getButtonClassName(3)}>LeaderBoards</button>
+        <button type="button" onClick={() => toggleActiveButton(4)} className={getButtonClassName(4)}>About</button>
       </div>
     </header>
   );
