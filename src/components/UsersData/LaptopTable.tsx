@@ -1,11 +1,6 @@
 import React, { useEffect, useState, FC } from 'react';
-import axios from 'axios';
 import tableSortImg from '../../assets/images/tableSort.svg';
 import styles from './userData.module.scss';
-import { User } from '../../store/dataSlice/collectionSlice';
-import {
-  INTEREST, NOW_PRICE, SALES, VOL,
-} from '../../mock/mockCollection';
 
 type UpdatedCollection = {
   id: string,
@@ -22,13 +17,15 @@ export interface UsersProps {
   collection: UpdatedCollection[];
 }
 
-const LaptopTable: FC<UsersProps> = ({ collection }) => {
-  const [collectionForTable, setCollectionForTable] = useState(collection);
-  const [sortOrder, setSortOrder] = useState<{ [key: string]: 'asc' | 'desc' }>({});
-  console.log(collection)
-  console.log({collectionForTable})
+export const getFloorPrice = (price: number): number => Math.floor(price);
 
-  const getFloorPrice = (price: number): number => Math.floor(price);
+const LaptopTable: FC<UsersProps> = ({ collection }) => {
+  const [collectionForTable, setCollectionForTable] = useState([]);
+  const [sortOrder, setSortOrder] = useState<{ [key: string]: 'asc' | 'desc' }>({});
+
+  useEffect(() => {
+    setCollectionForTable(collection);
+  }, [collection]);
 
   const handleSortClick = (key: keyof UpdatedCollection) => {
     setCollectionForTable((prevUserData) => {

@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
-import { useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
+import axios from 'axios';
 import LaptopTable from './LaptopTable';
-import { getCollectionThunk } from '../../store/dataSlice/collectionSlice';
-import { useAppSelector } from '../../store/hooks';
 import {
   INTEREST, NOW_PRICE, SALES, VOL,
 } from '../../mock/mockCollection';
 import tableViewImg from '../../assets/images/tableView.svg';
 import listViewImg from '../../assets/images/listView.svg';
 import styles from './userData.module.scss';
+import MobileList from './MobileList';
 
 const UsersData = () => {
+  const [collection, setCollection] = useState([]);
   const [collectionForRender, setCollectionForRender] = useState([]);
 
-  const dispatch = useDispatch<ThunkDispatch<RootState, undefined, AnyAction>>();
-  const collection = useAppSelector((state) => state.collection);
+  useEffect(() => {
+    axios.get('https://robox-test.herokuapp.com/api/collection', {
+      headers: {
+        apikey: 'test123',
+      },
+    })
+      .then((response) => setCollection(response.data.collection))
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }, []);
 
   useEffect(() => {
-    dispatch(getCollectionThunk());
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(!collection.loading, Array.isArray(collection.collection))
-    console.log((collection.collection.collection))
-    console.log((collection))
-
-    if (!collection.loading && Array.isArray(collection.collection)) {
-      console.log(2, 'isArray', Array.isArray(collection.collection), collection.collection)
-      const updatedCollection = collection.collection.map((user) => ({
+    if (Array.isArray(collection)) {
+      const updatedCollection = collection.map((user) => ({
         id: user.collection_id,
         avatar: user.project.img_url,
         name: user.project.display_name,
@@ -43,14 +40,6 @@ const UsersData = () => {
       setCollectionForRender(updatedCollection);
     }
   }, [collection]);
-
-  console.log('collectionForRender', collectionForRender);
-
-  if (collection.loading) {
-    return (
-      <div>hi</div>
-    );
-  }
 
   return (
     <div className={styles.wrapper}>
@@ -66,6 +55,7 @@ const UsersData = () => {
         </div>
       </div>
       <LaptopTable collection={collectionForRender} />
+      <MobileList collection={collectionForRender} />
     </div>
   );
 };

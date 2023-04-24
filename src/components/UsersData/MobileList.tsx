@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { UsersProps } from './LaptopTable';
+import { UsersProps, getFloorPrice } from './LaptopTable';
 import styles from './userData.module.scss';
 
-const MobileList:FC<UsersProps> = ({ users }) => (
+const MobileList:FC<UsersProps> = ({ collection }) => (
   <div className={`${styles.mobileList} ${styles.mobile_screen}`}>
-    {users.map((user) => (
+    {collection.map((user) => (
       <div key={user.id} className={styles.mobileList__user}>
         <div className={styles.mobileList__userHead}>
           <img src={user.avatar} alt="avatar" className={styles.table__avatar} />
@@ -13,7 +13,7 @@ const MobileList:FC<UsersProps> = ({ users }) => (
         <div className={styles.mobileList__userRow}>
           <p>Floor Price</p>
           <p>
-            {user.floor_price}
+            {getFloorPrice(user.floor_price)}
             {' '}
             SOL
           </p>
