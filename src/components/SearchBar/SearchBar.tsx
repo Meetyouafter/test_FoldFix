@@ -24,7 +24,7 @@ const SearchBar = () => {
         <p className={styles.header__company}>Robox.Fi</p>
         <div className={styles.buttons__container_laptop}>
           <button type="button" onClick={() => toggleActiveButton(1)} className={getButtonClassName(1)}>Trade</button>
-          <button type="button" onClick={() => toggleActiveButton(2)} className={getButtonClassName(2)}>Lend</button>
+          <button type="button" data-index="2" onClick={() => toggleActiveButton(2)} className={getButtonClassName(2)}>Lend</button>
           <button type="button" onClick={() => toggleActiveButton(3)} className={getButtonClassName(3)}>LeaderBoards</button>
           <button type="button" onClick={() => toggleActiveButton(4)} className={getButtonClassName(4)}>About</button>
         </div>

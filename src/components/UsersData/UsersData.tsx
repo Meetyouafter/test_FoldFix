@@ -3,8 +3,8 @@ import tableViewImg from '../../assets/images/tableView.svg';
 import listViewImg from '../../assets/images/listView.svg';
 import LaptopTable from './LaptopTable';
 import mockUsers from '../../mock/mockUsers';
-import styles from './table.module.scss';
 import MobileList from './MobileList';
+import styles from './userData.module.scss';
 
 const UsersData = () => (
   <div className={styles.wrapper}>

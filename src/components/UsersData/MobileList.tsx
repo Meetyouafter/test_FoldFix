@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { UsersProps } from './LaptopTable';
-import styles from './table.module.scss';
+import styles from './userData.module.scss';
 
 const MobileList:FC<UsersProps> = ({ users }) => (
   <div className={`${styles.mobileList} ${styles.mobile_screen}`}>

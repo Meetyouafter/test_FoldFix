@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FC } from 'react';
 import axios from 'axios';
 import tableSortImg from '../../assets/images/tableSort.svg';
-import styles from './table.module.scss';
+import styles from './userData.module.scss';
 
 type User = {
   id: number,
