@@ -8,7 +8,7 @@ const initialState: CollectionState = {
   error: null,
 };
 
-export const fetchUsers = createAsyncThunk('api/collection', async () => {
+export const getCollection = createAsyncThunk('api/collection', async () => {
   const response = await axios.get('https://robox-test.herokuapp.com/api/collection', {
     headers: {
       apikey: 'test123',
@@ -23,17 +23,17 @@ export const collectionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state) => ({
+      .addCase(getCollection.pending, (state) => ({
         ...state,
         isLoading: true,
         error: null,
       }))
-      .addCase(fetchUsers.fulfilled, (state, action) => ({
+      .addCase(getCollection.fulfilled, (state, action) => ({
         ...state,
         isLoading: false,
         collection: action.payload.collection,
       }))
-      .addCase(fetchUsers.rejected, (state, action) => ({
+      .addCase(getCollection.rejected, (state, action) => ({
         ...state,
         isLoading: false,
         error: action.error.message ?? 'An error occurred',

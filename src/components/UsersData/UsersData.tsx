@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { User as UserType } from '../../store/types';
-import { fetchUsers } from '../../store/collectionSlice';
+import { getCollection } from '../../store/collectionSlice';
 import { RootState } from '../../store/store';
 import LaptopTable from './LaptopTable';
 import {
@@ -15,6 +14,7 @@ import listViewImg from '../../assets/images/listView.svg';
 import styles from './userData.module.scss';
 import MobileList from './MobileList';
 import Loader from '../Loader/Loader';
+import Error from '../Error/Error';
 
 const UsersData = () => {
   const [collectionForRender, setCollectionForRender] = useState([]);
@@ -22,9 +22,10 @@ const UsersData = () => {
   const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
   const collection = useSelector<RootState, UserType[]>((state) => state.collection.collection);
   const isLoading = useSelector<RootState>((state) => state.collection.isLoading);
+  const error = useSelector<RootState>((state) => state.collection.error);
 
   useEffect(() => {
-    dispatch(fetchUsers()); // Fetch all users
+    dispatch(getCollection());
   }, [dispatch]);
 
   useEffect(() => {
@@ -45,6 +46,10 @@ const UsersData = () => {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (error) {
+    return <Error error={error as string} />;
   }
 
   return (
