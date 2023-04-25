@@ -1,8 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 import StartPage from './components/StartPage/StartPage';
 
 const App = () => (
-  <StartPage />
+  <Provider store={store}>
+    <StartPage />
+  </Provider>
 );
 
 export default App;

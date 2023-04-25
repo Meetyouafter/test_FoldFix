@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { User as UserType } from '../../store/types';
+import { fetchUsers } from '../../store/collectionSlice';
+import { RootState } from '../../store/store';
 import LaptopTable from './LaptopTable';
 import {
   INTEREST, NOW_PRICE, SALES, VOL,
@@ -8,22 +14,18 @@ import tableViewImg from '../../assets/images/tableView.svg';
 import listViewImg from '../../assets/images/listView.svg';
 import styles from './userData.module.scss';
 import MobileList from './MobileList';
+import Loader from '../Loader/Loader';
 
 const UsersData = () => {
-  const [collection, setCollection] = useState([]);
   const [collectionForRender, setCollectionForRender] = useState([]);
 
+  const dispatch: ThunkDispatch<RootState, void, AnyAction> = useDispatch();
+  const collection = useSelector<RootState, UserType[]>((state) => state.collection.collection);
+  const isLoading = useSelector<RootState>((state) => state.collection.isLoading);
+
   useEffect(() => {
-    axios.get('https://robox-test.herokuapp.com/api/collection', {
-      headers: {
-        apikey: 'test123',
-      },
-    })
-      .then((response) => setCollection(response.data.collection))
-      .catch((error) => {
-        throw new Error(error);
-      });
-  }, []);
+    dispatch(fetchUsers()); // Fetch all users
+  }, [dispatch]);
 
   useEffect(() => {
     if (Array.isArray(collection)) {
@@ -40,6 +42,10 @@ const UsersData = () => {
       setCollectionForRender(updatedCollection);
     }
   }, [collection]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.wrapper}>
